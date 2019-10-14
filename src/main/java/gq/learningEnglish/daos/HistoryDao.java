@@ -1,7 +1,7 @@
 package gq.learningEnglish.daos;
 
 import gq.learningEnglish.SqlScripts;
-import gq.learningEnglish.models.Questions;
+import gq.learningEnglish.models.WordsForTesting;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -15,12 +15,12 @@ public class HistoryDao {
         jdbc = jdbcOperations;
     }
 
-    public void addHistoryRecord(Questions questions) {
+    public void addHistoryRecord(WordsForTesting wordsForTesting) {
         final HashMap<String, Object> params = new HashMap<>();
         params.put("userId", 101);
-        params.put("vocabularyId", questions.getVocabularyId());
-        params.put("lang", questions.getAskingLanguage().name());
-        params.put("result", questions.getResult());
+        params.put("vocabularyId", wordsForTesting.getVocabularyId());
+        params.put("lang", wordsForTesting.getAskingLanguage().name());
+        params.put("result", wordsForTesting.getResult());
         jdbc.update(SqlScripts.ADD_HISTORY_RESULT.getSql(), params);
     }
 }
