@@ -48,7 +48,6 @@ public class PrepareQuestionsDao {
         final HashMap<String, Object> params = new HashMap<>();
         params.put("numberOfRussianWords", russianWordsNumber);
         params.put("numberOfEnglishWords", englishWordsNumber);
-        //List<WordsForTesting> wordsList = jdbc.query(SqlScripts.GET_RANDOM_WORDS.getSql(), params, new QuestionsMapper());
         Map<Question, List<Answer>> wordsList = jdbc.query(SqlScripts.GET_RANDOM_WORDS.getSql(), params, new QuestionsMapper());
         printMapQuestions(wordsList);
         return wordsList;

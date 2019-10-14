@@ -1,6 +1,5 @@
 package gq.learningEnglish.models.wordsQuestionnaire;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

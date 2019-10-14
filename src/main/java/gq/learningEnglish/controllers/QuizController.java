@@ -17,9 +17,7 @@ public class QuizController {
     private final PrepareQuestionsDao prepareQuestionsDao;
     private final HistoryDao historyDao;
 
-    private Map<Question, List<Answer>> askingWords;
     private String answer;
-    private String tempResult;
     private Scanner scanner = new Scanner(System.in);
 
     public QuizController(PrepareQuestionsDao prepareQuestionsDao, HistoryDao historyDao) {
@@ -30,26 +28,26 @@ public class QuizController {
     @Bean
     public void startTest() {
         RandomWordsMode wordsMode = RandomWordsMode.RUSSIAN;
-        askingWords = prepareQuestionsDao.getRandomWords(6, wordsMode);
+        Map<Question, List<Answer>> askingWords = prepareQuestionsDao.getRandomWords(6, wordsMode);
         System.out.println("Let's start! Write translation to the next words." + askingWords.size());
-        /*for (int i = 0; i < askingWords.size(); i++) {
-            if (wordsMode == RandomWordsMode.RUSSIAN) {
-                askingRussianTranslation(i);
-            } else if (wordsMode == RandomWordsMode.ENGLISH) {
-                askingEnglishTranslation(i);
-            } else if (wordsMode == RandomWordsMode.ABSOLUTE_RANDOM) {
-                if(Math.random() < 0.5) {
-                    askingRussianTranslation(i);
+
+        String tempResult;
+        // set only correct answers. All empty fields "result" means wrong answer
+        for (Map.Entry<Question, List<Answer>> wordMap : askingWords.entrySet()) {
+            Question questionWord = wordMap.getKey();
+            System.out.println(questionWord.getAskingWord());
+            for (int i = 0; i < wordMap.getValue().size(); i++) {
+                System.out.println("Your answer: ");
+                answer = scanner.nextLine().toUpperCase();
+                if (wordMap.getValue().stream().anyMatch(s -> s.getAnswerWord().equals(answer) && !s.isResult())) {
+                    wordMap.getValue().stream().filter(s -> s.getAnswerWord().equals(answer)).forEach(ss -> ss.setResult(true));
+                    tempResult = "CORRECT!";
                 } else {
-                    askingEnglishTranslation(i);
+                    tempResult = "INCORRECT!";
                 }
+                System.out.println("Your answer is " + answer + ". " + tempResult);
             }
         }
-        int occurrences = Collections.frequency(askingWords, "bat");
-        for (WordsForTesting q : askingWords) {
-            historyDao.addHistoryRecord(q);
-        }
-        scanner.close();*/
     }
 
     /*private void askingRussianTranslation(int i) {
