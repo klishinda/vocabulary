@@ -32,22 +32,28 @@ public class QuizController {
         System.out.println("Let's start! Write translation to the next words." + askingWords.size());
 
         String tempResult;
+        int countCorrectAnswers = 0;
+        int countAllWords = 0;
         // set only correct answers. All empty fields "result" means wrong answer
         for (Map.Entry<Question, List<Answer>> wordMap : askingWords.entrySet()) {
             Question questionWord = wordMap.getKey();
             System.out.println(questionWord.getAskingWord());
             for (int i = 0; i < wordMap.getValue().size(); i++) {
+                countAllWords++;
                 System.out.println("Your answer: ");
                 answer = scanner.nextLine().toUpperCase();
                 if (wordMap.getValue().stream().anyMatch(s -> s.getAnswerWord().equals(answer) && !s.isResult())) {
                     wordMap.getValue().stream().filter(s -> s.getAnswerWord().equals(answer)).forEach(ss -> ss.setResult(true));
                     tempResult = "CORRECT!";
+                    countCorrectAnswers++;
                 } else {
                     tempResult = "INCORRECT!";
                 }
                 System.out.println("Your answer is " + answer + ". " + tempResult);
             }
         }
+        System.out.println("----------RESULTS----------");
+        System.out.println("Correct answers: "+countCorrectAnswers+"/"+countAllWords);
     }
 
     /*private void askingRussianTranslation(int i) {
