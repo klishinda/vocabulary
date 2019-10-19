@@ -22,7 +22,8 @@ public class QuestionsMapper implements ResultSetExtractor<Map<Question, List<An
 
             Question question = new Question(AvailableLanguages.valueOf(rs.getString("asking_language")),
                     rs.getInt("asking_word_id"),
-                    rs.getString("asking_word"));
+                    rs.getString("asking_word"),
+                    rs.getString("description"));
             Answer answer = new Answer(rs.getInt("vocabulary_id"),
                     rs.getInt("answer_word_id"),
                     rs.getString("answer_word"));

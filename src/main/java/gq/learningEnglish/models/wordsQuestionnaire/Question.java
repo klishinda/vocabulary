@@ -15,10 +15,12 @@ public class Question {
     AvailableLanguages askingLanguage;
     int askingWordId;
     String askingWord;
+    String description;
 
-    public Question(AvailableLanguages askingLanguage, int askingWordId, String askingWord) {
+    public Question(AvailableLanguages askingLanguage, int askingWordId, String askingWord, String description) {
         this.askingLanguage = askingLanguage;
         this.askingWordId = askingWordId;
         this.askingWord = askingWord;
+        this.description = description;
     }
 }
