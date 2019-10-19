@@ -25,7 +25,7 @@ public class LibraryController {
 
     @Bean
     public void start() {
-        int newId = vocabularyDao.addWordPair("Белый", "Whi", 101, 101);
+        int newId = vocabularyDao.addWordPair("Белый", "Whi", 101);
         //dao.removeWordPair(newId);
         //dao.updateRussianWord(10001, "DDD");
         //dao.updateEnglishWord(20003, "TTT");

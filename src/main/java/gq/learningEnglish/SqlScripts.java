@@ -10,7 +10,7 @@ public enum SqlScripts {
     GET_ENGLISH_WORD_ID("select e.id from english_words e where e.word = :engWord"),
     ADD_RUSSIAN_WORD("insert into russian_words(word) values (:rusWord)"),
     ADD_ENGLISH_WORD("insert into english_words(word) values (:engWord)"),
-    ADD_VOCABULARY_PAIR("insert into vocabulary(user_id, russian_id, english_id, part_of_speech) values (:userId, :rusId, :engId, :partOfSpeechId)"),
+    ADD_VOCABULARY_PAIR("insert into vocabulary(user_id, russian_id, english_id) values (:userId, :rusId, :engId)"),
     GET_RUSSIAN_WORD_TRANSLATION("select e.word from english_words e\n" +
                                     "join vocabulary v on v.english_id = e.id\n" +
                                     "join russian_words r on r.id = v.russian_id\n" +

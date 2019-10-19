@@ -15,7 +15,7 @@ public class VocabularyDao {
         jdbc = jdbcOperations;
     }
 
-    public int addWordPair(String russianWord, String englishWord, int userId, int partOfSpeechId) {
+    public int addWordPair(String russianWord, String englishWord, int userId) {
         final HashMap<String, Object> params = new HashMap<>();
         params.put("rusWord", russianWord.toUpperCase());
         params.put("engWord", englishWord.toUpperCase());
@@ -32,7 +32,6 @@ public class VocabularyDao {
         vocabularyParams.put("userId", userId);
         vocabularyParams.put("rusId", russianWordId);
         vocabularyParams.put("engId", englishWordId);
-        vocabularyParams.put("partOfSpeechId", partOfSpeechId);
         return jdbc.update(SqlScripts.ADD_VOCABULARY_PAIR.getSql(), vocabularyParams);
     }
 
