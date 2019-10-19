@@ -24,12 +24,12 @@ public enum SqlScripts {
     REMOVE_VOCABULARY_PAIR("delete from vocabulary where id = :vocabularyId"),
     REMOVE_RUSSIAN_WORD("delete from vocabulary where russian_id = :wordId; delete from russian_words where id = :wordId;"),
     REMOVE_ENGLISH_WORD("delete from vocabulary where english_id = :wordId; delete from english_words where id = :wordId;"),
-    GET_RANDOM_WORDS("select e.id as asking_word_id, e.word as asking_word, v.id as vocabulary_id, r.id as answer_word_id, r.word as answer_word, 'ENGLISH' as asking_language\n" +
+    GET_RANDOM_WORDS("select e.id as asking_word_id, e.word as asking_word, e.description, v.id as vocabulary_id, r.id as answer_word_id, r.word as answer_word, 'ENGLISH' as asking_language\n" +
                         "from (select * from english_words order by random() limit :numberOfEnglishWords) e\n" +
                         "join vocabulary v on v.english_id = e.id\n" +
                         "join russian_words r on r.id = v.russian_id\n" +
                         "union all\n" +
-                        "select r.id, r.word, v.id, e.id, e.word, 'RUSSIAN'\n" +
+                        "select r.id, r.word, r.description, v.id, e.id, e.word, 'RUSSIAN'\n" +
                         "from (select * from russian_words order by random() limit :numberOfRussianWords) r\n" +
                         "join vocabulary v on v.russian_id = r.id\n" +
                         "join english_words e on e.id = v.english_id;"),

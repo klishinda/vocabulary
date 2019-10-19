@@ -30,7 +30,7 @@ public class AskingVocabulary {
         // set only correct answers. All empty fields "result" means wrong answer
         for (Map.Entry<Question, List<Answer>> wordMap : askingWords.entrySet()) {
             Question questionWord = wordMap.getKey();
-            System.out.println(questionWord.getAskingWord());
+            System.out.println(questionWord.getAskingWord() + " " + questionWord.getDescription());
             for (int i = 0; i < wordMap.getValue().size(); i++) {
                 countAllWords++;
                 System.out.println("Your answer: ");
