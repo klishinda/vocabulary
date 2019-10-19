@@ -6,10 +6,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum SqlScripts {
-    GET_RUSSIAN_WORD_ID("select r.id from russian_words r where r.word = :rusWord"),
-    GET_ENGLISH_WORD_ID("select e.id from english_words e where e.word = :engWord"),
-    ADD_RUSSIAN_WORD("insert into russian_words(word) values (:rusWord)"),
-    ADD_ENGLISH_WORD("insert into english_words(word) values (:engWord)"),
+    GET_RUSSIAN_WORD_ID("select r.id, r.word, r.description, r.part_of_speech from russian_words r where r.word = :word"),
+    GET_ENGLISH_WORD_ID("select e.id, e.word, e.description, e.part_of_speech from english_words e where e.word = :word"),
+    ADD_RUSSIAN_WORD("insert into russian_words(word, description, part_of_speech) values (:word, :description, :partOfSpeech)"),
+    ADD_ENGLISH_WORD("insert into english_words(word, description, part_of_speech) values (:word, :description, :partOfSpeech)"),
     ADD_VOCABULARY_PAIR("insert into vocabulary(user_id, russian_id, english_id) values (:userId, :rusId, :engId)"),
     GET_RUSSIAN_WORD_TRANSLATION("select e.word from english_words e\n" +
                                     "join vocabulary v on v.english_id = e.id\n" +
