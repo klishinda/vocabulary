@@ -1,36 +1,33 @@
 package gq.learningEnglish.controllers;
 
 import gq.learningEnglish.daos.*;
-import gq.learningEnglish.models.RandomWordsMode;
+import gq.learningEnglish.models.Word;
+import gq.learningEnglish.services.VocabularyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class LibraryController {
-    private final EnglishWordsDao englishDao;
-    private final RussianWordsDao russianDao;
-    private final TranslationDao translationDao;
     private final VocabularyDao vocabularyDao;
-    private final PrepareQuestionsDao prepareQuestionsDao;
+    private final VocabularyService vocabularyService;
 
     @Autowired
-    public LibraryController(EnglishWordsDao englishDao, RussianWordsDao russianDao, TranslationDao translationDao, VocabularyDao vocabularyDao, PrepareQuestionsDao prepareQuestionsDao) {
-        this.englishDao = englishDao;
-        this.russianDao = russianDao;
-        this.translationDao = translationDao;
+    public LibraryController(VocabularyDao vocabularyDao, VocabularyService vocabularyService) {
         this.vocabularyDao = vocabularyDao;
-        this.prepareQuestionsDao = prepareQuestionsDao;
+        this.vocabularyService = vocabularyService;
     }
 
     @Bean
     public void start() {
-        int newId = vocabularyDao.addWordPair("Белый", "Whi", 101, 101);
-        //dao.removeWordPair(newId);
+        Word engWord = new Word("WHIT", null, (byte) 101);
+        Word rusWord = new Word("БЕЛЫЙ", null, (byte) 102);
+        int newId = vocabularyService.addWordPair(rusWord, engWord, 101);
+        //dao.removeVocabularyRecord(newId);
         //dao.updateRussianWord(10001, "DDD");
         //dao.updateEnglishWord(20003, "TTT");
-        translationDao.getEnglishTranslation("WHITE");
-        translationDao.getRussianTranslation("ДЕЛАТЬ");
+        vocabularyDao.getEnglishTranslation("WHITE");
+        vocabularyDao.getRussianTranslation("ДЕЛАТЬ");
         //prepareQuestionsDao.getRandomWords(6, RandomWordsMode.RUSSIAN);
     }
 }
