@@ -8,18 +8,20 @@ DROP TABLE IF EXISTS users;
 
 create table russian_words (
                              id serial,
-                             word varchar(70) not null
+                             word varchar(70) not null,
+                             description varchar(250)
 );
 
 create table english_words (
                              id serial,
-                             word varchar(70) not null
+                             word varchar(70) not null,
+                             description varchar(250)
 );
 
 alter table russian_words add constraint russian_words_pkey PRIMARY KEY (id);
-alter table russian_words add constraint russian_words_u1 UNIQUE (word);
+alter table russian_words add constraint russian_words_u1 UNIQUE (word, description);
 alter table english_words add constraint english_words_pkey PRIMARY KEY (id);
-alter table english_words add constraint english_words_u1 UNIQUE (word);
+alter table english_words add constraint english_words_u1 UNIQUE (word, description);
 
 create table parts_of_speech (
                                id serial,
